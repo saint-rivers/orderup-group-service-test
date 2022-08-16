@@ -1,0 +1,19 @@
+version: "3.8"
+
+volumes:
+  test-data:
+
+services:
+  order-database:
+    build:
+      context: .
+    restart: unless-stopped
+    container_name: db.test.com
+    ports:
+      - "7433:5432"
+    environment:
+      - POSTGRES_DB=testdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - test-data:/var/lib/postgresql/data
